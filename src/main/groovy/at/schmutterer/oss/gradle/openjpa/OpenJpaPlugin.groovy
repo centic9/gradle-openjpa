@@ -22,6 +22,8 @@ import org.apache.openjpa.lib.util.Options
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 class OpenJpaPlugin implements Plugin<Project> {
 
@@ -43,6 +45,20 @@ class OpenJpaPlugin implements Plugin<Project> {
                         tree.files as String[],
                         new Options(target.openjpa.toProperties())
                 )
+
+                /*
+                Class clazz = loader.loadClass("org.apache.openjpa.lib.util.Options")
+                logger.info("Found options: " + clazz)
+
+                String[] args = tree.files as String[];
+                //Options options = new Options(target.openjpa.toProperties());
+                Constructor<?> constr = clazz.getConstructor(java.util.Properties.class);
+                Object options = constr.newInstance(target.openjpa.toProperties());
+
+				Class enhClass = loader.loadClass("org.apache.openjpa.enhance.PCEnhancer")
+				Method method = enhClass.getMethod("run", String[].class, clazz)
+				method.invoke(null, args, options)
+				*/
             } finally {
                 Thread.currentThread().setContextClassLoader(oldClassLoader)
             }
