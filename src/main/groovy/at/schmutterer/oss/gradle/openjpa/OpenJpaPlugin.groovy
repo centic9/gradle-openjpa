@@ -32,6 +32,7 @@ class OpenJpaPlugin implements Plugin<Project> {
         target.extensions.create("openjpa", OpenJpaExtension)
         def task = target.tasks.create("openjpaEnhance").doLast {
             URL[] urls = collectURLs(target)
+            logger.info("Found URLs: " + urls) 
             def oldClassLoader = Thread.currentThread().getContextClassLoader()
             def loader = new URLClassLoader(urls, oldClassLoader)
             try {
