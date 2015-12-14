@@ -42,12 +42,11 @@ class OpenJpaPlugin implements Plugin<Project> {
                     tree = target.fileTree(target.sourceSets.main.output.classesDir)
                 }
                 logger.info("enhancing {}", tree.files);
-                PCEnhancer.run(
+                /*PCEnhancer.run(
                         tree.files as String[],
                         new Options(target.openjpa.toProperties())
-                )
+                )*/
 
-                /*
                 Class clazz = loader.loadClass("org.apache.openjpa.lib.util.Options")
                 logger.info("Found options: " + clazz)
 
@@ -59,7 +58,6 @@ class OpenJpaPlugin implements Plugin<Project> {
 				Class enhClass = loader.loadClass("org.apache.openjpa.enhance.PCEnhancer")
 				Method method = enhClass.getMethod("run", String[].class, clazz)
 				method.invoke(null, args, options)
-				*/
             } finally {
                 Thread.currentThread().setContextClassLoader(oldClassLoader)
             }
