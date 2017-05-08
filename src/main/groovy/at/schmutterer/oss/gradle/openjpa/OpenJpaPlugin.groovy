@@ -17,8 +17,6 @@
 
 package at.schmutterer.oss.gradle.openjpa
 
-import org.apache.openjpa.enhance.PCEnhancer
-import org.apache.openjpa.lib.util.Options
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
@@ -52,7 +50,7 @@ class OpenJpaPlugin implements Plugin<Project> {
 
                 String[] args = tree.files as String[];
                 //Options options = new Options(target.openjpa.toProperties());
-                Constructor<?> constr = clazz.getConstructor(java.util.Properties.class);
+                Constructor<?> constr = clazz.getConstructor(Properties.class);
                 Object options = constr.newInstance(target.openjpa.toProperties());
 
 				Class enhClass = loader.loadClass("org.apache.openjpa.enhance.PCEnhancer")
